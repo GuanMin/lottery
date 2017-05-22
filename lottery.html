@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+<div id="lottery">
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="lottery-unit J-lottery-unit J-lottery-unit-0"><img src="img/1.jpg"><div class="mask"></div></td>
+            <td class="lottery-unit J-lottery-unit J-lottery-unit-1"><img src="img/2.jpg"><div class="mask"></div></td>
+            <td class="lottery-unit J-lottery-unit J-lottery-unit-2"><img src="img/3.jpg"><div class="mask"></div></td>
+        </tr>
+        <tr>
+            <td class="lottery-unit J-lottery-unit J-lottery-unit-7"><img src="img/4.jpg"><div class="mask"></div></td>
+            <td><a class="J-start-btn" href="#"></a></td>
+            <td class="lottery-unit J-lottery-unit J-lottery-unit-3"><img src="img/5.jpg"><div class="mask"></div></td>
+        </tr>
+        <tr>
+            <td class="lottery-unit J-lottery-unit J-lottery-unit-6"><img src="img/6.jpg"><div class="mask"></div></td>
+            <td class="lottery-unit J-lottery-unit J-lottery-unit-5"><img src="img/7.jpg"><div class="mask"></div></td>
+            <td class="lottery-unit J-lottery-unit J-lottery-unit-4"><img src="img/8.jpg"><div class="mask"></div></td>
+        </tr>
+    </table>
+</div>
+<div id="dialog" title="中奖通知"></div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/Lottery2.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        modal: true,
+        show: {
+            effect: "blind",
+            duration: 1000
+        },
+        hide: {
+            effect: "explode",
+            duration: 1000
+        },
+        buttons: {
+            "马上领奖": function() {
+             location.href='https://www.baidu.com';
+            },
+            "稍后领奖": function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+
+    var prizeArr = ['免佣券50元', '免佣券10元', '免佣券30元', '免佣券15元', '免佣券8元', '免佣券5元', '免佣券2元', '平衡车'];
+    var lottery = new Lottery({
+        $target: $("#lottery"),
+        endIndex: 2,
+        quanshu: 2,
+        callback:function (endIndex) {
+            console.log('你中了' + prizeArr[endIndex]);
+            $( "#dialog").html('你中了' + prizeArr[endIndex] + '<br>是否现在去领奖？').dialog( "open" );
+        }
+    });
+</script>
+</body>
+</html>
